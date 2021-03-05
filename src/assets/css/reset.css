@@ -1,0 +1,43 @@
+@import "~normalize.css";
+@import "~antd/dist/antd.css";
+
+/* 样式的重置 */
+body, html, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, header, menu, section, p, input, td, th, ins {
+  padding: 0;
+  margin: 0;
+}
+body,html {
+  overflow: hidden;
+  font-size: 80px;      /*可视化屏幕适配，（24等份）*/
+}
+
+ul, ol, li {
+  list-style: none;
+}
+
+/* 全局样式 */
+#root, #app{
+  height: 100%;
+}
+body, textarea, select, input, button {
+  font-size: 12px;
+  color: #515a6e;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.text-nowrap {   /*不换行样式*/
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/*修改ant-design组件库全局样式*/
+.ant-btn{                     /*按钮样式*/
+  border-radius: 4px;
+  color: #515a6e;
+  font-size: 12px;
+}   
+.ant-btn .anticon{
+  font-size: 10px;
+}
