@@ -1,9 +1,10 @@
-import { Button, message, Spin } from 'antd'
+import { Button, Spin, Row, Col, Input, Select } from 'antd'
 import React, { memo, useEffect, useReducer } from 'react'
 import reducer from './reducer'
 import { socketUrl } from '@/network/config'
-import { MonitoringWrapper } from './style'
+import { MonitoringWrapper, ParamsWrapper } from './style'
 
+const { Option } = Select;
 export default memo(function Monitoring() {
   const [state, dispatch] = useReducer(reducer, {
     url: "",
@@ -38,22 +39,18 @@ export default memo(function Monitoring() {
       dispatch({type: 'open_connect', payload: false});
     }
   }
-  const close = () => {
-    const { ws, isConnect } = state;
-    if(isConnect){
-      ws.close();
-      dispatch({type: 'open_connect', payload: false});
-      message.warning('Socket连接已关闭！')
-    }else{
-      message.warning('当前Socket正处于未连接状态，无需关闭连接！')
-    }
+  const handleRongheChange = (value) => {
+
   }
+  const handleColorChange = () => {
+
+  }
+  
   return (
-    <MonitoringWrapper maxPosX={50} maxPosY={50} minPosX={100} minPosY={100}>
+    <MonitoringWrapper>
       <div className="tip">
         <span className="title">以下为热成像设备实时输出视频流内容，可能会存在延迟...</span>
         <Button type="primary" onClick={connect} disabled={state.isConnect}>手动重连</Button>
-        <Button onClick={close} type="primary" danger style={{marginLeft: '5px'}}>关闭连接</Button>
       </div>
       {
         state.isConnect ? 
@@ -61,13 +58,81 @@ export default memo(function Monitoring() {
          : 
         <h3>*抱歉，检测到Socket服务未上线，暂时无法获取视频内容</h3>
       }
-      
-        <Spin size="large" tip="连接中..." spinning={state.spin}>
-          <div className="videoBox">
-            <img src={state.url} alt="资源请求中,请等待..."/>
+      {/* //state.spin */}
+      <Spin size="large" tip="连接中..." spinning={state.spin}>  
+        <div className="videoBox">
+          <img src={state.url} alt="资源请求中,请等待..."/>
+        </div>
+        <ParamsWrapper>
+          <div className="data">
+            <div className="data-row">
+              <div>温度单位</div>
+              <div>℃</div>
+            </div>
+            <div className="data-row">
+              <div>中心温度</div>
+              <div>30</div>
+            </div>
+            <div className="data-row">
+              <div>最大温度</div>
+              <div>30</div>
+            </div>
+            <div className="data-row">
+              <div>最小温度</div>
+              <div>30</div>
+            </div>
+            <div className="data-row">
+              <div>平均温度</div>
+              <div>30</div>
+            </div>
           </div>
-        </Spin>
-        
+          <Row className="config">
+            <Col span={10}>
+              <Row className="row" justify="start">高温警报</Row>
+              <Row className="row" justify="start">高温阈值</Row>
+              <Row className="row" justify="start">融合比</Row>
+              <Row className="row" justify="start">调色板</Row>
+              <Row className="row" justify="start">发射率</Row>
+              <Row className="row" justify="start">LED补光</Row>
+            </Col>
+            <Col span={14}>
+              <Row className="row">
+                <div className="warning"></div>
+              </Row>
+              <Row className="row" align="center">
+                <Col span={14}>
+                  <Input className="warningValue"/>
+                </Col>
+                <Col span={10}>
+                  <Button className="warningValueBtn">Set</Button>
+                </Col>
+              </Row>
+              <Row className="row">
+                <Select defaultValue="0.75" className="rongheSelect" onChange={handleRongheChange}>
+                  <Option value="0.70">0.70</Option>
+                  <Option value="0.75">0.80</Option>
+                  <Option value="0.85">0.85</Option>
+                </Select>
+              </Row>
+              <Row className="row">
+                <Select defaultValue="橙红色" className="colorSelect" onChange={handleColorChange}>
+                  <Option value="橙">橙黑色</Option>
+                  <Option value="橙红">橙紫色</Option>
+                  <Option value="橙红色">橙绿色</Option>
+                </Select>
+              </Row>
+              <Row className="row">
+                <Col span={13}><Input className="rateValue"/></Col>
+                <Col span={10}><Button className="rateValueBtn">Set</Button></Col>
+              </Row>
+              <Row className="rowLast"><Button className="LED">开启</Button></Row>
+            </Col>
+          </Row>
+          <div className="bottomBtn">
+            <Button className="btn">开始采集</Button>
+          </div>
+        </ParamsWrapper>
+      </Spin>
     </MonitoringWrapper>
   )
 })

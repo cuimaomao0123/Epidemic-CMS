@@ -14,28 +14,18 @@ export const MonitoringWrapper = styled.div`
     }
   }
   h3{
-    margin: 40px 0 0 25%;
+    margin: 40px 0 0 22%;
     color: red;
     font-size: 16px;
   }
   .videoBox{
     position: relative;
-    left: 50%;
+    left: 42%;
     top: 10px;
     transform: translateX(-50%);
-    height: 70vh;
-    width: 45vw;
+    height: 65vh;
+    width: 40vw;
     border: 1px solid #000000;
-    /* .max{
-      position: absolute;
-      top: ${props => (props.maxPosY*650/230) + 'px'};
-      left: ${props => (props.maxPosX*700/230) + 'px'};
-    }
-    .min{
-      position: absolute;
-      top: ${props => (props.minPosY*650/230) + 'px'};
-      left: ${props => (props.minPosX*700/230) + 'px'};
-    } */
     img{
       width: 100%;
       height: 100%;
@@ -54,5 +44,88 @@ export const MonitoringWrapper = styled.div`
       font-size: 16px;
     }
   }
-  
+`
+export const ParamsWrapper = styled.div`
+  position: absolute;
+  left: 62.5%;
+  top: 10px;
+  height: 65vh;
+  width: 250px;
+  border: 1px solid #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  .data{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    height: 180px;
+    background-color: #dddddd;
+    font-size: 16px;
+    .data-row{
+      width: 100%;
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-around;
+      &:first-child{
+        font-weight: bold;
+      }
+    }
+  }
+  .config{
+    font-size: 16px;
+    width: 85%;
+    .row{
+      margin-top: 27px;
+    }
+    .rowLast{
+      margin-top: 25px;
+    }
+    .warning{
+      height: 24px;
+      width: 70px;
+      background-color: rgb(141, 249, 20);
+    }
+    .warningValue, .warningValueBtn, .rateValue, .rateValueBtn, .LED{
+      line-height: 1.2;
+    }
+    .warningValueBtn, .rateValueBtn{
+      height: 26px;
+      color: #000000;
+      margin-left: 5px;
+      background-color: #dddddd;
+    }
+    .rongheSelect{
+      .ant-select-selector{
+        height: 26px;
+      }
+      width: 125px;
+    }
+    .colorSelect{
+      width: 125px;
+      .ant-select-selector{
+        height: 26px;
+      }
+    }
+    .LED{
+      height: 26px;
+      width: 120px;
+      background-color: #dddddd;
+      color: #000000;
+    }
+  }
+  .bottomBtn{
+    margin-top: 40px;
+    .btn{
+      width: 150px;
+      background-color: #dddddd;
+      color: #000000;
+      font-weight: bold;
+      letter-spacing: 4px;
+    }
+  }
 `
