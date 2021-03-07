@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 
+export const ImageWrapper = styled.div`
+  position: absolute;
+  left: 17.8%;
+  top: 10px;
+  .image{
+    width: 50px;
+    height: 65vh;
+  }
+`
+
 export const MonitoringWrapper = styled.div`
   .tip{
     position: relative;
@@ -14,17 +24,17 @@ export const MonitoringWrapper = styled.div`
     }
   }
   h3{
-    margin: 40px 0 0 22%;
+    margin: 40px 0 0 18%;
     color: red;
     font-size: 16px;
   }
   .videoBox{
     position: relative;
-    left: 42%;
+    left: 38%;
     top: 10px;
     transform: translateX(-50%);
     height: 65vh;
-    width: 40vw;
+    width: 35vw;
     border: 1px solid #000000;
     img{
       width: 100%;
@@ -47,7 +57,7 @@ export const MonitoringWrapper = styled.div`
 `
 export const ParamsWrapper = styled.div`
   position: absolute;
-  left: 62.5%;
+  left: 55.7%;
   top: 10px;
   height: 65vh;
   width: 250px;
@@ -119,7 +129,7 @@ export const ParamsWrapper = styled.div`
     }
   }
   .bottomBtn{
-    margin-top: 40px;
+    margin-top: 20px;
     .btn{
       width: 150px;
       background-color: #dddddd;
@@ -128,4 +138,16 @@ export const ParamsWrapper = styled.div`
       letter-spacing: 4px;
     }
   }
+`
+export const Params2Wrapper = styled.div`
+  position: absolute;
+  left: 68.8%;
+  top: 10px;
+  height: 65vh;
+  width: 250px;
+  border: 1px solid #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
 `

@@ -3,7 +3,7 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
 import { BASE_URL, TIMEOUT } from "./config";
-import { getToken } from '@/utils'
+// import { getToken } from '@/utils'
 
 const request = (config) => {
   const instance = axios.create({
@@ -16,10 +16,10 @@ const request = (config) => {
     // 1.发送网络请求时, 在界面的中间位置显示Loading的组件
     NProgress.start();
     // 2.某一些请求要求用户必须携带token, 如果没有携带, 那么直接跳转到登录页面
-    if(!(config.url === "/admin/login")){
-      const token = getToken()
-      config.headers['token'] = token
-    }
+    // if(!(config.url === "/admin/login")){
+    //   const token = getToken()
+    //   config.headers['token'] = token
+    // }
     // 3.params/data序列化的操作
   
     return config;
