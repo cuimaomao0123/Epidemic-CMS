@@ -39,7 +39,10 @@ export default memo(function Monitoring() {
     dispatch({type: 'change_ws', payload: ws});
     getDeviceNowStatus()
     return () => {
-      state.ws.close();           //组件销毁，关闭连接
+      if(state.ws){
+        state.ws.close();           //组件销毁，关闭连接
+      }
+      collect({facilityState: false});
 }                                 //eslint-disable-next-line
   },[])
   useEffect(() => {
@@ -172,7 +175,9 @@ export default memo(function Monitoring() {
     dispatch({type: 'change_device_status', payload: res});
   }
   const collectChange = async() => {
-    const res = await collect({});
+    const res = await collect({
+      facilityState: state.deviceStatus? false: true
+    });
     if(res.code ===200){
       if(res.data){
         message.success('开始采集成功!')

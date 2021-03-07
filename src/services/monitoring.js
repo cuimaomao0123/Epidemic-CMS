@@ -1,4 +1,4 @@
-import request from '@/network/request'
+import request from '@/network/request2'
 
 export const openDevice = (config) => {
     return request({

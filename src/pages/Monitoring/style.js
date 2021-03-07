@@ -141,7 +141,7 @@ export const ParamsWrapper = styled.div`
 `
 export const Params2Wrapper = styled.div`
   position: absolute;
-  left: 68.8%;
+  left: 68.9%;
   top: 10px;
   height: 65vh;
   width: 250px;
