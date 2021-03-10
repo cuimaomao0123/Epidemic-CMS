@@ -193,7 +193,7 @@ export default memo(function Monitoring() {
     <MonitoringWrapper>
       <div className="tip">
         <span className="title">以下为热成像设备实时输出视频流内容，可能会存在延迟...</span>
-        <Button type="primary" onClick={connect} disabled={state.isConnect}>手动重连</Button>
+        {/* <Button type="primary" onClick={connect} disabled={state.isConnect}>手动重连</Button> */}
       </div>
       {
         state.isConnect ? 
@@ -205,6 +205,9 @@ export default memo(function Monitoring() {
         <div className="videoBox">
           <img src={state.url} alt="资源请求中,请等待..."/>
         </div>
+        <ImageWrapper>
+          <img src={dealColorImage()} className="image"/>
+        </ImageWrapper>
         <ParamsWrapper>
           <div className="data">
             <div className="data-row">
@@ -279,11 +282,34 @@ export default memo(function Monitoring() {
             <Button className="btn" onClick={collectChange}>{state.deviceStatus? '关闭采集':'开始采集'}</Button>
           </div>
         </ParamsWrapper>
-        <ImageWrapper>
-          <img src={dealColorImage()} className="image"/>
-        </ImageWrapper>
         <Params2Wrapper>
-        11111
+          <div className="data">
+            <div>正常记录周期</div>
+            <div><Input style={{width: '80px'}}/>&nbsp;s</div>
+          </div>
+          <div className="data">
+            <div>快速周期</div>
+            <div><Input style={{width: '80px'}}/>&nbsp; s</div>
+          </div>
+          <div className="data">
+            <div>采集切换温度</div>
+            <div><Input style={{width: '80px'}}/>&nbsp; ℃</div>
+          </div>
+          <div className="btn-row">
+            <Button className="btn">开始记录</Button>
+          </div>
+          <div className="btn-row">
+            <Button className="btn">寻找最高温记录</Button>
+          </div>
+          <div className="btn-row">
+            <Button className="btn">绘制最高温度曲线</Button>
+          </div>
+          <div className="btn-row">
+            <Button className="btn">打开图像保存目录</Button>
+          </div>
+          <div className="btn-row">
+            <Button className="btn last-btn">超过高温保存图片 开</Button>
+          </div>
         </Params2Wrapper>
       </Spin>
     </MonitoringWrapper>

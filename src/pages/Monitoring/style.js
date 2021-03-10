@@ -60,7 +60,7 @@ export const ParamsWrapper = styled.div`
   left: 55.7%;
   top: 10px;
   height: 65vh;
-  width: 250px;
+  width: 14vw;
   border: 1px solid #000000;
   display: flex;
   flex-direction: column;
@@ -140,14 +140,38 @@ export const ParamsWrapper = styled.div`
   }
 `
 export const Params2Wrapper = styled.div`
+padding-top: 30px;
   position: absolute;
-  left: 68.9%;
+  left: 70%;
   top: 10px;
   height: 65vh;
-  width: 250px;
+  width: 13vw;
   border: 1px solid #000000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  .data{
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 15px;
+  }
+  .btn-row{
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .btn{
+      width: 160px;
+      height: 38px;
+      font-size: 15px;
+    }
+    .last-btn{
+      font-weight: bold;
+    }
+  }
 `
