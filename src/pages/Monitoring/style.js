@@ -98,7 +98,7 @@ export const ParamsWrapper = styled.div`
     .warning{
       height: 24px;
       width: 70px;
-      background-color: rgb(141, 249, 20);
+      background-color: ${props => props.warning ? 'red': 'rgb(141, 249, 20)'};
     }
     .warningValue, .warningValueBtn, .rateValue, .rateValueBtn, .LED{
       line-height: 1.2;

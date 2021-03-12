@@ -32,7 +32,8 @@ export default memo(function Monitoring() {
     rateValue: 0.50,
     LEDstate: false,
     color: '01',
-    deviceStatus: ''
+    deviceStatus: '',
+    warning: false
   })
   useEffect(() => {    
     const ws = new WebSocket(socketUrl);
@@ -47,7 +48,14 @@ export default memo(function Monitoring() {
   },[])
   useEffect(() => {
     connect();                    //eslint-disable-next-line
-  },[state.ws])                   
+  },[state.ws])   
+  useEffect(() => {
+    if(state.max.length>0 && state.max >state.templateValue){
+      dispatch({type: 'change_warning', payload: true});
+    }else{
+      dispatch({type: 'change_warning', payload: false});
+    }
+  },[state.max])                  
   const connect = () => {
     const ws = state.ws;
     if(ws !== null){
@@ -208,7 +216,7 @@ export default memo(function Monitoring() {
         <ImageWrapper>
           <img src={dealColorImage()} className="image"/>
         </ImageWrapper>
-        <ParamsWrapper>
+        <ParamsWrapper warning={state.warning}>
           <div className="data">
             <div className="data-row">
               <div>温度单位</div>

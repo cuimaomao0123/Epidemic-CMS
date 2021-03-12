@@ -26,6 +26,8 @@ export default function reducer(state, action) {
       return {...state, color: action.payload};
     case "change_device_status":
       return {...state, deviceStatus: action.payload};
+    case "change_warning":
+      return {...state, warning: action.payload};
     default:
       return state;
   }
