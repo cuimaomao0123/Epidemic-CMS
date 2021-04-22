@@ -60,5 +60,11 @@ export const collect = (config) => {
     });
 }
 
+export const getInitParama = () => {
+    return request({
+        url: '/client/getAll',
+        method: 'GET'
+    });
+}
 
 

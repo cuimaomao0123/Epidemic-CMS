@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const ImageWrapper = styled.div`
   position: absolute;
-  left: 17.8%;
+  /* left: 17.8%; */
+  left: 27.3%;
   top: 10px;
   .image{
     width: 50px;
@@ -30,7 +31,8 @@ export const MonitoringWrapper = styled.div`
   }
   .videoBox{
     position: relative;
-    left: 38%;
+    /* left: 38%; */
+    left: 47.4%;
     top: 10px;
     transform: translateX(-50%);
     height: 65vh;
@@ -57,7 +59,8 @@ export const MonitoringWrapper = styled.div`
 `
 export const ParamsWrapper = styled.div`
   position: absolute;
-  left: 55.7%;
+  /* left: 55.7%; */
+  left: 65%;
   top: 10px;
   height: 65vh;
   width: 14vw;

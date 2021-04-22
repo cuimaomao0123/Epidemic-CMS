@@ -9,7 +9,8 @@ import { tempValue,
           rateValue,
           LED,
           getDeviceStatus,
-          collect } from '@/services/monitoring'
+          collect,
+          getInitParama } from '@/services/monitoring'
 import b1 from '@/assets/images/1.jpg'
 import b2 from '@/assets/images/2.jpg'
 import b3 from '@/assets/images/3.jpg'
@@ -33,12 +34,15 @@ export default memo(function Monitoring() {
     LEDstate: false,
     color: '01',
     deviceStatus: '',
-    warning: false
+    warning: false,
+    emissivityE: "",   //发射率初始值
+    fusionThanE: ""    //融合比初始值
   })
   useEffect(() => {    
     const ws = new WebSocket(socketUrl);
     dispatch({type: 'change_ws', payload: ws});
     getDeviceNowStatus()
+    getInit();
     return () => {
       if(state.ws){
         state.ws.close();           //组件销毁，关闭连接
@@ -67,7 +71,7 @@ export default memo(function Monitoring() {
         dispatch({type: 'change_spin', payload: false});
       }
       ws.onmessage = (msg) => {
-        const data = JSON.parse(msg.data)
+        const data = JSON.parse(msg.data);
         const { base64, average, center, max, min } = data;
         dispatch({type: 'change_url', payload: base64});
         dispatch({type: 'change_average', payload: average});
@@ -84,11 +88,21 @@ export default memo(function Monitoring() {
       }
     }
   }
+  const getInit = async() => {
+    const res = await getInitParama();
+    if(res.code === 200){
+      dispatch({type: 'change_emissivityE', payload: res.data.emissivityE});
+      dispatch({type: 'change_fusionThanE', payload: res.data.fusionThanE});
+      dispatch({type: 'change_template_value', payload: res.data.tempValueE});
+    }else{
+      message.error(res.msg);
+    }
+  }
   const templateValueChange = (value) => {
     let data = value.target.value;
-    if(data.length <=0){
-      data = 36.5;
-    }
+    // if(data.length <=0){
+    //   data = 36.5;
+    // }
     dispatch({type: 'change_template_value', payload: data});
     
   }
@@ -103,6 +117,7 @@ export default memo(function Monitoring() {
     }
   }
   const handleRongheChange = async(value) => {
+    dispatch({type: 'change_fusionThanE', payload: value});
     const res = await rongheValue({
       fusionThan: value
     });
@@ -142,6 +157,7 @@ export default memo(function Monitoring() {
   }
   const rateValueChange = (value) => {
     const res = value.target.value;
+    dispatch({type: 'change_emissivityE', payload: res});
     if(Number(res) >=0.1 && Number(res) <=1){
       dispatch({type: 'change_rate_value', payload: res});
     }else{
@@ -254,14 +270,14 @@ export default memo(function Monitoring() {
               </Row>
               <Row className="row" align="center">
                 <Col span={14}>
-                  <Input className="warningValue" defaultValue="40.0" onChange={templateValueChange}/>
+                  <Input className="warningValue" value={state.templateValue} onChange={templateValueChange}/>
                 </Col>
                 <Col span={10}>
                   <Button className="warningValueBtn" onClick={setTemplateVlaue}>Set</Button>
                 </Col>
               </Row>
               <Row className="row">
-                <Select defaultValue="02" className="rongheSelect" onChange={handleRongheChange}>
+                <Select value={state.fusionThanE} className="rongheSelect" onChange={handleRongheChange}>
                   <Option value="01">0.00</Option>
                   <Option value="02">0.25</Option>
                   <Option value="03">0.50</Option>
@@ -280,7 +296,7 @@ export default memo(function Monitoring() {
               </Row>
               <Row className="row">
                 {/* 0.10 - 1.00 */}
-                <Col span={13}><Input defaultValue="0.98" className="rateValue" onChange={rateValueChange}/></Col>  
+                <Col span={13}><Input value={state.emissivityE} className="rateValue" onChange={rateValueChange}/></Col>  
                 <Col span={10}><Button className="rateValueBtn" onClick={setRateValue}>Set</Button></Col>
               </Row>
               <Row className="rowLast"><Button className="LED" onClick={LEDchange}>{state.LEDstate? '关': '开'}</Button></Row>
@@ -290,7 +306,7 @@ export default memo(function Monitoring() {
             <Button className="btn" onClick={collectChange}>{state.deviceStatus? '关闭采集':'开始采集'}</Button>
           </div>
         </ParamsWrapper>
-        <Params2Wrapper>
+        {/* <Params2Wrapper>
           <div className="data">
             <div>正常记录周期</div>
             <div><Input style={{width: '80px'}}/>&nbsp;s</div>
@@ -318,7 +334,7 @@ export default memo(function Monitoring() {
           <div className="btn-row">
             <Button className="btn last-btn">超过高温保存图片 开</Button>
           </div>
-        </Params2Wrapper>
+        </Params2Wrapper> */}
       </Spin>
     </MonitoringWrapper>
   )

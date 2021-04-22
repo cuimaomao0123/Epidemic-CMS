@@ -28,6 +28,10 @@ export default function reducer(state, action) {
       return {...state, deviceStatus: action.payload};
     case "change_warning":
       return {...state, warning: action.payload};
+    case "change_emissivityE":
+      return {...state, emissivityE: action.payload};
+    case "change_fusionThanE":
+      return {...state, fusionThanE: action.payload};
     default:
       return state;
   }
